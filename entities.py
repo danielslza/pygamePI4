@@ -3,6 +3,7 @@ import pygame
 class Jogador:
     def __init__(self, CHAO_Y):
         self.rect = pygame.Rect(100, CHAO_Y - 80, 40, 80)
+        self.pos_x, self.pos_y = float(self.rect.x), float(self.rect.y)
         self.velX = self.velY = self.jumpBuffer = 0
         self.velocidadeMax, self.aceleracao, self.desaceleracao = 400, 1000, 1400
         self.forcaPulo, self.gravidade, self.gravidadeQueda = -820, 1600, 2000
@@ -18,14 +19,17 @@ class Jogador:
         else:
             self.velX = max(0, abs(self.velX) - self.desaceleracao * dt) * (1 if self.velX > 0 else -1)
 
-        self.rect.x = max(0, min(LARGURA_MAPA - self.rect.width, self.rect.x + self.velX * dt))
-        if self.rect.x in (0, LARGURA_MAPA - self.rect.width): self.velX = 0
+        self.pos_x = max(0.0, min(float(LARGURA_MAPA - self.rect.width), self.pos_x + self.velX * dt))
+        self.rect.x = int(self.pos_x)
+        if self.pos_x <= 0 or self.pos_x >= LARGURA_MAPA - self.rect.width: self.velX = 0
 
         self.velY += (self.gravidade if self.velY < 0 else self.gravidadeQueda) * dt
-        self.rect.y += self.velY * dt
+        self.pos_y += self.velY * dt
+        self.rect.y = int(self.pos_y)
 
         if self.rect.bottom >= CHAO_Y:
             self.rect.bottom, self.velY, self.noChao = CHAO_Y, 0, True
+            self.pos_y = float(self.rect.y)
         else:
             self.noChao = False
 
