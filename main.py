@@ -124,7 +124,7 @@ def main():
                         else: cena_atual = CENA_GAMEOVER
                     else:
                         jogador.jumpBuffer = 0.15
-                elif e.key == pygame.K_r and cena_atual == CENA_GAMEOVER:
+                elif cena_atual == CENA_GAMEOVER:
                     cena_atual, largura_mapa_atual = CENA_DESERTO, LARGURA_MAPA
                     jogador, camera = Jogador(CHAO_Y), Camera(LARGURA_TELA, LARGURA_MAPA)
 
@@ -233,7 +233,7 @@ def main():
             tela.fill(CORES["fundo"])
             txt_go = fonts["grande"].render("GAME OVER", False, CORES["go"])
             tela.blit(txt_go, (LARGURA_TELA // 2 - txt_go.get_width() // 2, ALTURA_TELA // 2 - 100))
-            txt_r = fonts["ui"].render("Pressione 'R' para reiniciar", False, CORES["texto"])
+            txt_r = fonts["ui"].render("Pressione qualquer tecla para reiniciar", False, CORES["texto"])
             tela.blit(txt_r, (LARGURA_TELA // 2 - txt_r.get_width() // 2, ALTURA_TELA // 2 + 50))
 
         pygame.display.flip()
