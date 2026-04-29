@@ -1,6 +1,5 @@
 import pygame
 
-
 class Jogador:
     SPRITE_FILES = {
         "idle": "assets/folhadesprites.png",
@@ -18,7 +17,7 @@ class Jogador:
         self.noChao, self.direcao, self.estado = True, "direita", "idle"
         self.frame_index = 0
         self.frame_timer = 0
-        self.anim_speed = 0.15  # Tempo por frame (segundos)
+        self.anim_speed = 0.15  
         self.animations = {}
         self.current_animation = []
         self.load_all_animations()
@@ -48,43 +47,39 @@ class Jogador:
             self.rect.width = self.current_animation[0].get_width()
             self.rect.height = self.current_animation[0].get_height()
 
-    def update(self, dt, teclas, mov, CHAO_Y, LARGURA_MAPA):
+    def update(self, dt, teclas, mov, CHAO_Y, LARGURA_MAPA, plataformas=None, chao_ativo=True):
         self.jumpBuffer = max(0, self.jumpBuffer - dt)
-
         if mov:
             self.direcao = "direita" if mov > 0 else "esquerda"
             acel = self.desaceleracao if mov * self.velX < 0 else self.aceleracao
             self.velX = max(-self.velocidadeMax, min(self.velocidadeMax, self.velX + mov * acel * dt))
         else:
             self.velX = max(0, abs(self.velX) - self.desaceleracao * dt) * (1 if self.velX > 0 else -1)
-
         self.pos_x = max(0.0, min(float(LARGURA_MAPA - self.rect.width), self.pos_x + self.velX * dt))
         self.rect.x = int(self.pos_x)
         if self.pos_x <= 0 or self.pos_x >= LARGURA_MAPA - self.rect.width: self.velX = 0
-
         self.velY += (self.gravidade if self.velY < 0 else self.gravidadeQueda) * dt
         self.pos_y += self.velY * dt
         self.rect.y = int(self.pos_y)
-
-        if self.rect.bottom >= CHAO_Y + 10:
+        self.noChao = False
+        if chao_ativo and self.rect.bottom >= CHAO_Y + 10:
             self.rect.bottom, self.velY, self.noChao = CHAO_Y + 10, 0, True
             self.pos_y = float(self.rect.y)
-        else:
-            self.noChao = False
-
+        if plataformas and self.velY >= 0:
+            for p in plataformas:
+                if self.rect.colliderect(p) and self.rect.bottom - self.velY * dt <= p.top + 10:
+                    self.rect.bottom, self.velY, self.noChao = p.top, 0, True
+                    self.pos_y = float(self.rect.y)
+                    break
         if self.jumpBuffer > 0 and self.noChao:
             self.velY, self.noChao, self.jumpBuffer = self.forcaPulo, False, 0
         elif not (teclas[pygame.K_w] or teclas[pygame.K_UP]) and self.velY < 0:
             self.velY *= 0.7
-
         self.estado = "jump" if self.velY < 0 else "fall" if not self.noChao else "run" if self.velX else "idle"
-
-        # Atualiza animação baseada no estado
         if self.estado not in self.animations:
             self.set_animation("idle")
         elif getattr(self, "current_animation", None) != self.animations[self.estado]:
             self.set_animation(self.estado)
-
         if self.current_animation:
             self.frame_timer += dt
             if self.frame_timer >= self.anim_speed:
@@ -104,6 +99,5 @@ class Camera:
         alvo_pos = self.largura_tela * (0.4 if mov > 0 else 0.6 if mov < 0 else 0.45 if jogador.direcao == "direita" else 0.55)
         self.pos_tela += (alvo_pos - self.pos_tela) * 2.0 * dt
         alvoCamera = jogador.rect.centerx - self.pos_tela
-        
         vel = min(0.5 + abs(alvoCamera - self.x) / 80.0 * 4.5, 8.0)
         self.x = max(0, min(self.x + (alvoCamera - self.x) * vel * dt, self.largura_mapa - self.largura_tela))
