@@ -1,5 +1,8 @@
 GUIA DE JOGO - AVENTURA NO DESERTO (Fase 5 - ODS 6)
 
+OBJETIVO DA FASE:
+Seu objetivo é infiltrar-se na casa do Chefe da Vila para investigar segredos ocultos. Para isso, você deve criar uma distração cortando os coqueiros da vila e resolver um enigma lógico baseado em pistas encontradas durante a exploração.
+
 CONTROLES:
 - A / D ou Setas Esquerda/Direita: Movimentar a personagem (Hope).
 - W ou Seta Cima: Pular / Entrar em casas (quando o prompt aparecer).
@@ -7,15 +10,24 @@ CONTROLES:
 - F11: Alternar Tela Cheia.
 - Scroll do Mouse: Zoom dinâmico (segue o ponteiro).
 
-PASSO A PASSO PARA CHEGAR AO FIM (TO BE CONTINUED):
+TRIGGERS (GATILHOS) DA FASE:
+- Coleta Automática: Ao caminhar sobre o Machado ou a Carta, eles são coletados instantaneamente.
+- Entrada em Casas: O prompt surge apenas quando você está alinhado à porta. Use 'W'.
+- Mobilização da Vila: O gatilho para a reunião da vila ocorre EXATAMENTE após o corte do 3º coqueiro.
+- Puzzle de Alavancas: O diálogo final só é disparado se a sequência 4-3-5-1-2 for inserida sem erros.
+- Sensor de Queda: Cair nos vãos da casa do chefe resulta em Game Over imediato.
 
-1. O INÍCIO: Você começa no deserto. Explore para a direita.
-2. O MACHADO: Entre na primeira casa que encontrar (Casa 1). Lá dentro, pegue o Machado que está no chão. Ele aparecerá no seu inventário (slot no canto superior esquerdo).
-3. A PISTA: Continue para a direita e entre na segunda casa (outra Casa 1). No chão, você encontrará uma Carta. Leia ela para descobrir a sequência secreta.
-4. A REBELIÃO: Saia da casa e use o Machado para cortar 3 Coqueiros (aperte 'E' perto deles). Após o terceiro, a vila se reunirá ao redor do último coqueiro cortado.
-5. A CASA DO CHEFE: Com a vila distraída, você agora pode entrar na casa maior (Casa 2 - Casa do Chefe) sem ser expulso.
-6. O DESAFIO: Dentro da casa, você enfrentará uma fase de plataformas sobre um abismo. Se cair, é Game Over! Chegue até o outro lado.
-7. O ENIGMA: No final da casa, você encontrará 5 alavancas. Use a tecla 'E' para ativá-las na ordem correta da carta.
-8. O CONFRONTO: Se acertar, o Chefe aparecerá para te confrontar. Após o diálogo, a tela se fechará no rosto de Hope com um efeito de íris.
+CUIDADOS E DICAS:
+- Vigilância do Chefe: Não tente entrar na casa maior (Casa 2) antes de distrair os moradores; o chefe irá te expulsar!
+- Precisão nos Saltos: Na casa do chefe, as plataformas são estreitas. Use o pulo com cautela e mantenha a velocidade controlada.
+- Ordem do Enigma: Se você ativar uma alavanca na ordem errada, todas as alavancas serão resetadas. Releia a carta na segunda casa se esquecer o código.
+- Zoom Estratégico: Use o scroll do mouse para ver mais longe ou focar em detalhes do cenário.
 
-Parabéns! Você concluiu a versão DEMO da fase.
+PASSO A PASSO PARA O FINAL:
+1. Pegue o Machado na primeira Casa 1.
+2. Pegue a Carta na segunda Casa 1 (Sequência: 4-3-5-1-2).
+3. Corte 3 coqueiros com 'E'.
+4. Entre na Casa do Chefe (Casa 2).
+5. Atravesse o abismo pelas plataformas.
+6. Ative as alavancas na ordem: 4 -> 3 -> 5 -> 1 -> 2.
+7. Assista ao confronto final ("To Be Continued").
